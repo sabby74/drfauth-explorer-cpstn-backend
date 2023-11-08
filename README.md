@@ -63,7 +63,7 @@
 
 ### USAGE:
 
-### In this Application user would be able to create @ manage a Plan. This application works with full crud (create,read,update,delete)functionality. where user can create a new plan with a subject and details with date and time feilds are also provided for the convenience of the end user. This App is useful because in this App,  to create a plan is simple and time saving.   
+### In this Application user would be able to create data regarding shops nearby . This application works with full crud (create,read,update,delete)functionality. where user can create a instance like what shops are near . he can then be able to add the shops to his favorite list ,  date and time feilds are also provided for the convenience of the end user.
 
 ### CONTACT INFO:
 
