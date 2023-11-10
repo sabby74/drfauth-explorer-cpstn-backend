@@ -1,10 +1,8 @@
 from rest_framework import generics
-from .models import Shops, Review
-from .serializers import ShopsSerializer, ReviewSerializer
 from rest_framework import permissions
 from shops.permissions import IsOwnerOrReadOnly
-
-# Create your views here.
+from .models import Shops, Review
+from .serializers import ShopsSerializer, ReviewSerializer
 
 class ShopList(generics.ListCreateAPIView):
     queryset = Shops.objects.all()
@@ -12,12 +10,20 @@ class ShopList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
-       serializer.save(owner=self.request.user)
+        serializer.save(owner=self.request.user)
+
+    def get_queryset(self):
+        queryset = Shops.objects.all()
+        return queryset.prefetch_related('reviews')  # Use prefetch_related to get related reviews efficiently
 
 class ShopDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Shops.objects.all()
     serializer_class = ShopsSerializer
     permission_classes = [IsOwnerOrReadOnly]
+
+    def get_queryset(self):
+        queryset = Shops.objects.all()
+        return queryset.prefetch_related('reviews')  # Use prefetch_related to get related reviews efficiently
 
 class ReviewList(generics.ListCreateAPIView):
     queryset = Review.objects.all()
@@ -25,7 +31,7 @@ class ReviewList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
-       serializer.save(owner=self.request.user)
+        serializer.save(owner=self.request.user)
 
 class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()

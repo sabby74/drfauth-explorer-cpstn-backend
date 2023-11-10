@@ -6,7 +6,7 @@ from .models import Shops, Review
 class ShopsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shops
-        fields = ('id','name', 'description', 'location', 'sells', 'rating', 'is_OpenSundays', 'created_at', 'updated_at', 'owner')
+        fields = ('id','name', 'description', 'location', 'sells', 'rating', 'is_OpenSundays', 'created_at', 'updated_at', 'owner', 'reviews')
         read_only_fields = ('created_at', 'updated_at', 'owner')
         owner = serializers.ReadOnlyField(source='owner.username')
 
