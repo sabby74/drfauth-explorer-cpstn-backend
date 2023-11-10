@@ -9,7 +9,7 @@ class Shops(models.Model):
     location = models.CharField(max_length=255, default=None)  
     sells = models.CharField(max_length=255, default=None)
     rating = models.FloatField(default=0.0)
-    is_OpenSundays = models.BooleanField(default=True)
+    is_OpenSundays = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(
