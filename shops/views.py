@@ -7,7 +7,7 @@ from .serializers import ShopsSerializer, ReviewSerializer
 class ShopList(generics.ListCreateAPIView):
     queryset = Shops.objects.all()
     serializer_class = ShopsSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.AllowAny]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -19,7 +19,7 @@ class ShopList(generics.ListCreateAPIView):
 class ShopDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Shops.objects.all()
     serializer_class = ShopsSerializer
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [permissions.AllowAny]
 
     def get_queryset(self):
         queryset = Shops.objects.all()
@@ -28,7 +28,7 @@ class ShopDetail(generics.RetrieveUpdateDestroyAPIView):
 class ReviewList(generics.ListCreateAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.AllowAny]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -36,4 +36,4 @@ class ReviewList(generics.ListCreateAPIView):
 class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [permissions.AllowAny]
